@@ -66,6 +66,12 @@ class LevelDB extends BaseLevelProvider {
 	/** @var \LevelDB */
 	protected $db;
 
+	private static function checkForLevelDBExtension(){
+		if(!extension_loaded('leveldb')){
+			throw new LevelException("The leveldb PHP extension is required to use this world format");
+		}
+	}
+
 	/**
 	 * LevelDB constructor.
 	 *
@@ -73,6 +79,8 @@ class LevelDB extends BaseLevelProvider {
 	 * @param string $path
 	 */
 	public function __construct(Level $level, string $path){
+		self::checkForLevelDBExtension();
+
 		$this->level = $level;
 		$this->path = $path;
 		if(!file_exists($this->path)){
@@ -158,6 +166,8 @@ class LevelDB extends BaseLevelProvider {
 	 * @param array      $options
 	 */
 	public static function generate(string $path, string $name, $seed, string $generator, array $options = []){
+		self::checkForLevelDBExtension();
+		
 		if(!file_exists($path)){
 			mkdir($path, 0777, true);
 		}
@@ -304,7 +314,7 @@ class LevelDB extends BaseLevelProvider {
 		$this->level->timings->syncChunkLoadDataTimer->startTiming();
 		$chunk = $this->readChunk($chunkX, $chunkZ);
 		if($chunk === null and $create){
-			$chunk = Chunk::getEmptyChunk($chunkX, $chunkZ);
+			$chunk = new Chunk($chunkX, $chunkZ);
 		}
 		$this->level->timings->syncChunkLoadDataTimer->stopTiming();
 
