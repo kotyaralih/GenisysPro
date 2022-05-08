@@ -834,7 +834,7 @@ class NBT {
 					}
 				}
 				$tag[$key] = $isNumeric ? ($isIntArray ? new IntArrayTag($key, []) : new ListTag($key, [])) : new CompoundTag($key, []);
-				self::fromArray($tag->[$key], $value, $guesser);
+				self::fromArray($tag->{$key}, $value, $guesser);
 			}else{
 				$v = call_user_func($guesser, $key, $value);
 				if($v instanceof Tag){
