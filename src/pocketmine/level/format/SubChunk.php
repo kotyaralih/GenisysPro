@@ -76,7 +76,7 @@ class SubChunk {
 	 * @return int
 	 */
 	public function getBlockId(int $x, int $y, int $z) : int{
-		return ord($this->ids{($x << 8) | ($z << 4) | $y});
+		return ord($this->ids[($x << 8) | ($z << 4) | $y]);
 	}
 
 	/**
@@ -88,7 +88,7 @@ class SubChunk {
 	 * @return bool
 	 */
 	public function setBlockId(int $x, int $y, int $z, int $id) : bool{
-		$this->ids{($x << 8) | ($z << 4) | $y} = chr($id);
+		$this->ids[($x << 8) | ($z << 4) | $y] = chr($id);
 		return true;
 	}
 
@@ -256,7 +256,7 @@ class SubChunk {
 	 */
 	public function getHighestBlockAt(int $x, int $z) : int{
 		for($y = 15; $y >= 0; --$y){
-			if($this->ids{($x << 8) | ($z << 4) | $y} !== "\x00"){
+			if($this->ids[($x << 8) | ($z << 4) | $y] !== "\x00"){
 				return $y;
 			}
 		}
