@@ -41,7 +41,7 @@ class ChunkUtils {
 				for($z = $x; $z < $zM; $z += 16){
 					$yM = $z + 4096;
 					for($y = $z; $y < $yM; $y += 256){
-						$result[$i] = $array{$y};
+						$result[$i] = $array[$y];
 						++$i;
 					}
 				}
