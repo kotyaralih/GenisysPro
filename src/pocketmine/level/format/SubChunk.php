@@ -119,9 +119,9 @@ class SubChunk {
 	public function setBlockData(int $x, int $y, int $z, int $data) : bool{
 		$i = ($x << 7) | ($z << 3) | ($y >> 1);
 		if(($y & 1) === 0){
-			$this->data{$i} = chr((ord($this->data{$i}) & 0xf0) | ($data & 0x0f));
+			$this->data[$i] = chr((ord($this->data[$i]) & 0xf0) | ($data & 0x0f));
 		}else{
-			$this->data{$i} = chr((($data & 0x0f) << 4) | (ord($this->data{$i}) & 0x0f));
+			$this->data[$i] = chr((($data & 0x0f) << 4) | (ord($this->data[$i]) & 0x0f));
 		}
 		return true;
 	}
@@ -136,9 +136,9 @@ class SubChunk {
 	public function getFullBlock(int $x, int $y, int $z) : int{
 		$i = ($x << 8) | ($z << 4) | $y;
 		if(($y & 1) === 0){
-			return (ord($this->ids{$i}) << 4) | (ord($this->data{$i >> 1}) & 0x0f);
+			return (ord($this->ids[$i]) << 4) | (ord($this->data{$i >> 1}) & 0x0f);
 		}else{
-			return (ord($this->ids{$i}) << 4) | (ord($this->data{$i >> 1}) >> 4);
+			return (ord($this->ids[$i]) << 4) | (ord($this->data{$i >> 1}) >> 4);
 		}
 	}
 
@@ -156,21 +156,21 @@ class SubChunk {
 		$changed = false;
 		if($id !== null){
 			$block = chr($id);
-			if($this->ids{$i} !== $block){
-				$this->ids{$i} = $block;
+			if($this->ids[$i] !== $block){
+				$this->ids[$i] = $block;
 				$changed = true;
 			}
 		}
 
 		if($data !== null){
 			$i >>= 1;
-			$byte = ord($this->data{$i});
+			$byte = ord($this->data[$i]);
 			if(($y & 1) === 0){
-				$this->data{$i} = chr(($byte & 0xf0) | ($data & 0x0f));
+				$this->data[$i] = chr(($byte & 0xf0) | ($data & 0x0f));
 			}else{
-				$this->data{$i} = chr((($data & 0x0f) << 4) | ($byte & 0x0f));
+				$this->data[$i] = chr((($data & 0x0f) << 4) | ($byte & 0x0f));
 			}
-			if($this->data{$i} !== $byte){
+			if($this->data[$i] !== $byte){
 				$changed = true;
 			}
 		}
@@ -204,11 +204,11 @@ class SubChunk {
 	 */
 	public function setBlockLight(int $x, int $y, int $z, int $level) : bool{
 		$i = ($x << 7) + ($z << 3) + ($y >> 1);
-		$byte = ord($this->blockLight{$i});
+		$byte = ord($this->blockLight[$i]);
 		if(($y & 1) === 0){
-			$this->blockLight{$i} = chr(($byte & 0xf0) | ($level & 0x0f));
+			$this->blockLight[$i] = chr(($byte & 0xf0) | ($level & 0x0f));
 		}else{
-			$this->blockLight{$i} = chr((($level & 0x0f) << 4) | ($byte & 0x0f));
+			$this->blockLight[$i] = chr((($level & 0x0f) << 4) | ($byte & 0x0f));
 		}
 		return true;
 	}
@@ -239,11 +239,11 @@ class SubChunk {
 	 */
 	public function setBlockSkyLight(int $x, int $y, int $z, int $level) : bool{
 		$i = ($x << 7) + ($z << 3) + ($y >> 1);
-		$byte = ord($this->skyLight{$i});
+		$byte = ord($this->skyLight[$i]);
 		if(($y & 1) === 0){
-			$this->skyLight{$i} = chr(($byte & 0xf0) | ($level & 0x0f));
+			$this->skyLight[$i] = chr(($byte & 0xf0) | ($level & 0x0f));
 		}else{
-			$this->skyLight{$i} = chr((($level & 0x0f) << 4) | ($byte & 0x0f));
+			$this->skyLight[$i] = chr((($level & 0x0f) << 4) | ($byte & 0x0f));
 		}
 		return true;
 	}
