@@ -282,7 +282,7 @@ class Network {
 
 			while($stream->offset < $len){
 				$buf = $stream->getString();
-				if(($pk = $this->getPacket(ord($buf{0}))) !== null){
+				if(($pk = $this->getPacket(ord($buf[0]))) !== null){
 					if($pk::NETWORK_ID === 0xfe){
 						throw new \InvalidStateException("Invalid BatchPacket inside BatchPacket");
 					}

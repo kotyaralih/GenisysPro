@@ -54,7 +54,7 @@ class EncapsulatedPacket{
 
 		$packet = new EncapsulatedPacket();
 
-		$flags = ord($binary{0});
+		$flags = ord($binary[0]);
 		$packet->reliability = $reliability = ($flags & 0b11100000) >> 5;
 		$packet->hasSplit = $hasSplit = ($flags & 0b00010000) > 0;
 		if($internal){

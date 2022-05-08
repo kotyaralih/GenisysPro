@@ -74,7 +74,7 @@ class BaseLang {
 		if(file_exists($path) and strlen($content = file_get_contents($path)) > 0){
 			foreach(explode("\n", $content) as $line){
 				$line = trim($line);
-				if($line === "" or $line{0} === "#"){
+				if($line === "" or $line[0] === "#"){
 					continue;
 				}
 

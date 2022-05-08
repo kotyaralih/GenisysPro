@@ -169,7 +169,7 @@ class SessionManager{
 			}
 
 			if($len > 0){
-				$pid = ord($buffer{0});
+				$pid = ord($buffer[0]);
 
 				if($pid === UNCONNECTED_PING::$ID){
 					//No need to create a session for just pings
@@ -254,7 +254,7 @@ class SessionManager{
 
 	public function receiveStream(){
 		if(strlen($packet = $this->server->readMainToThreadPacket()) > 0){
-			$id = ord($packet{0});
+			$id = ord($packet[0]);
 			$offset = 1;
 			if($id === RakLib::PACKET_ENCAPSULATED){
 				$len = ord($packet{$offset++});
