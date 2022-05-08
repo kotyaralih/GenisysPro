@@ -2261,7 +2261,7 @@ abstract class Entity extends Location implements Metadatable {
 	 *
 	 * @return bool
 	 */
-	public function setLinked($type = 0, Entity $entity){
+	public function setLinked(Entity $entity, $type = 0){
 		if($entity instanceof Boat or $entity instanceof Minecart){
 			$this->setDataProperty(57, 8, [0, 1, 0]); //This is a fast hack for Boat. TODO: Improve it
 		}
