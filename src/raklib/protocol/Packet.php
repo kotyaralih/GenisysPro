@@ -38,7 +38,7 @@ abstract class Packet{
 			return substr($this->buffer, $this->offset);
 		}
 
-		return $len === 1 ? $this->buffer{$this->offset++} : substr($this->buffer, ($this->offset += $len) - $len, $len);
+		return $len === 1 ? $this->buffer[$this->offset++] : substr($this->buffer, ($this->offset += $len) - $len, $len);
 	}
 
 	protected function getLong($signed = true){
@@ -62,7 +62,7 @@ abstract class Packet{
 	}
 
 	protected function getByte(){
-		return ord($this->buffer{$this->offset++});
+		return ord($this->buffer[$this->offset++]);
 	}
 
 	protected function getString(){
@@ -80,7 +80,7 @@ abstract class Packet{
 	}
 
 	protected function feof(){
-		return !isset($this->buffer{$this->offset});
+		return !isset($this->buffer[$this->offset]);
 	}
 
 	protected function put($str){

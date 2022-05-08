@@ -77,7 +77,7 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 * @return bool
 	 */
 	public function offsetExists($offset){
-		return isset($this->{$offset});
+		return isset($this->[$offset]);
 	}
 
 	/**
@@ -86,11 +86,11 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 * @return null
 	 */
 	public function offsetGet($offset){
-		if(isset($this->{$offset}) and $this->{$offset} instanceof Tag){
-			if($this->{$offset} instanceof \ArrayAccess){
-				return $this->{$offset};
+		if(isset($this->[$offset]) and $this->[$offset] instanceof Tag){
+			if($this->[$offset] instanceof \ArrayAccess){
+				return $this->[$offset];
 			}else{
-				return $this->{$offset}->getValue();
+				return $this->[$offset]->getValue();
 			}
 		}
 
@@ -103,9 +103,9 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 */
 	public function offsetSet($offset, $value){
 		if($value instanceof Tag){
-			$this->{$offset} = $value;
-		}elseif($this->{$offset} instanceof Tag){
-			$this->{$offset}->setValue($value);
+			$this->[$offset] = $value;
+		}elseif($this->[$offset] instanceof Tag){
+			$this->[$offset]->setValue($value);
 		}
 	}
 
@@ -113,7 +113,7 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 * @param mixed $offset
 	 */
 	public function offsetUnset($offset){
-		unset($this->{$offset});
+		unset($this->[$offset]);
 	}
 
 	/**

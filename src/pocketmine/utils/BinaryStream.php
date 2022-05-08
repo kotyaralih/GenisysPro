@@ -88,7 +88,7 @@ class BinaryStream extends \stdClass {
 			return $str;
 		}
 
-		return $len === 1 ? $this->buffer{$this->offset++} : substr($this->buffer, ($this->offset += $len) - $len, $len);
+		return $len === 1 ? $this->buffer[$this->offset++] : substr($this->buffer, ($this->offset += $len) - $len, $len);
 	}
 
 	/**
@@ -276,7 +276,7 @@ class BinaryStream extends \stdClass {
 	 * @return int
 	 */
 	public function getByte(){
-		return ord($this->buffer{$this->offset++});
+		return ord($this->buffer[$this->offset++]);
 	}
 
 	/**
@@ -473,6 +473,6 @@ class BinaryStream extends \stdClass {
 	 * @return bool
 	 */
 	public function feof(){
-		return !isset($this->buffer{$this->offset});
+		return !isset($this->buffer[$this->offset]);
 	}
 }

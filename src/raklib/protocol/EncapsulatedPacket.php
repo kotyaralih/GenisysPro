@@ -76,7 +76,7 @@ class EncapsulatedPacket{
 			if($reliability <= PacketReliability::RELIABLE_SEQUENCED and $reliability !== PacketReliability::RELIABLE){
 				$packet->orderIndex = Binary::readLTriad(substr($binary, $offset, 3));
 				$offset += 3;
-				$packet->orderChannel = ord($binary{$offset++});
+				$packet->orderChannel = ord($binary[$offset++]);
 			}
 		}
 

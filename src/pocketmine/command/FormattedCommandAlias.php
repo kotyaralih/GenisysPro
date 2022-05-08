@@ -93,7 +93,7 @@ class FormattedCommandAlias extends Command {
 			}
 
 			$required = false;
-			if($formatString{$index + 1} == '$'){
+			if($formatString[$index + 1] == '$'){
 				$required = true;
 
 				++$index;
@@ -103,7 +103,7 @@ class FormattedCommandAlias extends Command {
 
 			$argStart = $index;
 
-			while($index < strlen($formatString) and self::inRange(ord($formatString{$index}) - 48, 0, 9)){
+			while($index < strlen($formatString) and self::inRange(ord($formatString[$index]) - 48, 0, 9)){
 				++$index;
 			}
 
@@ -121,7 +121,7 @@ class FormattedCommandAlias extends Command {
 
 			$rest = false;
 
-			if($index < strlen($formatString) and $formatString{$index} === "-"){
+			if($index < strlen($formatString) and $formatString[$index] === "-"){
 				$rest = true;
 				++$index;
 			}

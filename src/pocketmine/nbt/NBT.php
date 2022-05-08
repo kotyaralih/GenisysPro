@@ -179,7 +179,7 @@ class NBT {
 	public static function parseJSON($data, &$offset = 0){
 		$len = strlen($data);
 		for(; $offset < $len; ++$offset){
-			$c = $data{$offset};
+			$c = $data[$offset];
 			if($c === "{"){
 				++$offset;
 				$data = self::parseCompound($data, $offset);
@@ -208,9 +208,9 @@ class NBT {
 		$data = [];
 
 		for(; $offset < $len; ++$offset){
-			if($str{$offset - 1} === "]"){
+			if($str[$offset - 1] === "]"){
 				break;
-			}elseif($str{$offset} === "]"){
+			}elseif($str[$offset] === "]"){
 				++$offset;
 				break;
 			}
@@ -271,9 +271,9 @@ class NBT {
 		$data = [];
 
 		for(; $offset < $len; ++$offset){
-			if($str{$offset - 1} === "}"){
+			if($str[$offset - 1] === "}"){
 				break;
-			}elseif($str{$offset} === "}"){
+			}elseif($str[$offset] === "}"){
 				++$offset;
 				break;
 			}
@@ -336,7 +336,7 @@ class NBT {
 
 		$len = strlen($data);
 		for(; $offset < $len; ++$offset){
-			$c = $data{$offset};
+			$c = $data[$offset];
 
 			if(!$inQuotes and ($c === " " or $c === "\r" or $c === "\n" or $c === "\t" or $c === "," or $c === "}" or $c === "]")){
 				if($c === "," or $c === "}" or $c === "]"){
@@ -350,7 +350,7 @@ class NBT {
 					throw new \Exception("Syntax error: invalid quote at offset $offset");
 				}
 			}elseif($c === "\\"){
-				$value .= isset($data{$offset + 1}) ? $data{$offset + 1} : "";
+				$value .= isset($data[$offset + 1]) ? $data[$offset + 1]: "";
 				++$offset;
 			}elseif($c === "{" and !$inQuotes){
 				if($value !== ""){
@@ -437,7 +437,7 @@ class NBT {
 
 		$len = strlen($data);
 		for(; $offset < $len; ++$offset){
-			$c = $data{$offset};
+			$c = $data[$offset];
 
 			if($c === ":"){
 				++$offset;
@@ -467,7 +467,7 @@ class NBT {
 			return substr($this->buffer, $this->offset);
 		}
 
-		return $len === 1 ? $this->buffer{$this->offset++} : substr($this->buffer, ($this->offset += $len) - $len, $len);
+		return $len === 1 ? $this->buffer[$this->offset++] : substr($this->buffer, ($this->offset += $len) - $len, $len);
 	}
 
 	/**
@@ -481,7 +481,7 @@ class NBT {
 	 * @return bool
 	 */
 	public function feof(){
-		return !isset($this->buffer{$this->offset});
+		return !isset($this->buffer[$this->offset]);
 	}
 
 	/**

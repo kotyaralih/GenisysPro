@@ -136,9 +136,9 @@ class SubChunk {
 	public function getFullBlock(int $x, int $y, int $z) : int{
 		$i = ($x << 8) | ($z << 4) | $y;
 		if(($y & 1) === 0){
-			return (ord($this->ids[$i]) << 4) | (ord($this->data{$i >> 1}) & 0x0f);
+			return (ord($this->ids[$i]) << 4) | (ord($this->data[$i >> 1]) & 0x0f);
 		}else{
-			return (ord($this->ids[$i]) << 4) | (ord($this->data{$i >> 1}) >> 4);
+			return (ord($this->ids[$i]) << 4) | (ord($this->data[$i >> 1]) >> 4);
 		}
 	}
 
