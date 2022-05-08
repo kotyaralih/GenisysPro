@@ -100,7 +100,7 @@ class SubChunk {
 	 * @return int
 	 */
 	public function getBlockData(int $x, int $y, int $z) : int{
-		$m = ord($this->data{($x << 7) + ($z << 3) + ($y >> 1)});
+		$m = ord($this->data[($x << 7) + ($z << 3) + ($y >> 1)]);
 		if(($y & 1) === 0){
 			return $m & 0x0f;
 		}else{
@@ -186,7 +186,7 @@ class SubChunk {
 	 * @return int
 	 */
 	public function getBlockLight(int $x, int $y, int $z) : int{
-		$byte = ord($this->blockLight{($x << 7) + ($z << 3) + ($y >> 1)});
+		$byte = ord($this->blockLight[($x << 7) + ($z << 3) + ($y >> 1)]);
 		if(($y & 1) === 0){
 			return $byte & 0x0f;
 		}else{
@@ -221,7 +221,7 @@ class SubChunk {
 	 * @return int
 	 */
 	public function getBlockSkyLight(int $x, int $y, int $z) : int{
-		$byte = ord($this->skyLight{($x << 7) + ($z << 3) + ($y >> 1)});
+		$byte = ord($this->skyLight[($x << 7) + ($z << 3) + ($y >> 1)]);
 		if(($y & 1) === 0){
 			return $byte & 0x0f;
 		}else{
