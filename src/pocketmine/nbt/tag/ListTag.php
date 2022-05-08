@@ -77,7 +77,7 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 * @return bool
 	 */
 	public function offsetExists($offset){
-		return isset($this->[$offset]);
+		return isset($this->{$offset});
 	}
 
 	/**
@@ -86,11 +86,11 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 * @return null
 	 */
 	public function offsetGet($offset){
-		if(isset($this->[$offset]) and $this->[$offset] instanceof Tag){
-			if($this->[$offset] instanceof \ArrayAccess){
-				return $this->[$offset];
+		if(isset($this->{$offset}) and $this->{$offset} instanceof Tag){
+			if($this->{$offset} instanceof \ArrayAccess){
+				return $this->{$offset};
 			}else{
-				return $this->[$offset]->getValue();
+				return $this->{$offset}->getValue();
 			}
 		}
 
@@ -103,9 +103,9 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 */
 	public function offsetSet($offset, $value){
 		if($value instanceof Tag){
-			$this->[$offset] = $value;
-		}elseif($this->[$offset] instanceof Tag){
-			$this->[$offset]->setValue($value);
+			$this->{$offset} = $value;
+		}elseif($this->{$offset} instanceof Tag){
+			$this->{$offset}->setValue($value);
 		}
 	}
 
@@ -113,7 +113,7 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 * @param mixed $offset
 	 */
 	public function offsetUnset($offset){
-		unset($this->[$offset]);
+		unset($this->{$offset});
 	}
 
 	/**
@@ -123,12 +123,12 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 	 */
 	public function count($mode = COUNT_NORMAL){
 		for($i = 0; true; $i++){
-			if(!isset($this->[$i])){
+			if(!isset($this->{$i})){
 				return $i;
 			}
 			if($mode === COUNT_RECURSIVE){
-				if($this->[$i] instanceof \Countable){
-					$i += count($this->[$i]);
+				if($this->{$i} instanceof \Countable){
+					$i += count($this->{$i});
 				}
 			}
 		}
@@ -172,57 +172,57 @@ class ListTag extends NamedTag implements \ArrayAccess, \Countable {
 				case NBT::TAG_Byte:
 					$tag = new ByteTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_Short:
 					$tag = new ShortTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_Int:
 					$tag = new IntTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_Long:
 					$tag = new LongTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_Float:
 					$tag = new FloatTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_Double:
 					$tag = new DoubleTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_ByteArray:
 					$tag = new ByteArrayTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_String:
 					$tag = new StringTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_List:
 					$tag = new TagEnum("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_Compound:
 					$tag = new CompoundTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 				case NBT::TAG_IntArray:
 					$tag = new IntArrayTag("");
 					$tag->read($nbt, $network);
-					$this->[$i] = $tag;
+					$this->{$i} = $tag;
 					break;
 			}
 		}
