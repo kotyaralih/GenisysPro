@@ -833,12 +833,12 @@ class NBT {
 						$isIntArray = false;
 					}
 				}
-				$tag{$key} = $isNumeric ? ($isIntArray ? new IntArrayTag($key, []) : new ListTag($key, [])) : new CompoundTag($key, []);
-				self::fromArray($tag->{$key}, $value, $guesser);
+				$tag[$key] = $isNumeric ? ($isIntArray ? new IntArrayTag($key, []) : new ListTag($key, [])) : new CompoundTag($key, []);
+				self::fromArray($tag->[$key], $value, $guesser);
 			}else{
 				$v = call_user_func($guesser, $key, $value);
 				if($v instanceof Tag){
-					$tag{$key} = $v;
+					$tag[$key] = $v;
 				}
 			}
 		}
